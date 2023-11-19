@@ -16,12 +16,7 @@ let corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Routes
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/notes', authentication, noteRouter);
-// Test api
-// app.get('/api/test', (req, res) => {
-//   res.json({ message: 'working fine..' });
-// });
 
 module.exports = app;
