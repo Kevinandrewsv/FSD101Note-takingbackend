@@ -1,12 +1,10 @@
 const Note = require('../models/noteModel');
 
-// View notes
+
 exports.allNotes = async (req, res) => {
   let user = req.user._id;
-  // console.log(user);
   try {
     const notes = await Note.find({ user });
-    // console.log(data);
     if (!notes) {
       return res.status(401).json({
         message: 'Notes not available',
@@ -27,12 +25,9 @@ exports.allNotes = async (req, res) => {
   }
 };
 
-// Create Note
 exports.createNote = async (req, res) => {
-  //   console.log(req.body, req.user);
   const { title, description } = req.body;
   const { _id } = req.user;
-  //   console.log(_id, title, description);
   try {
     if (!title || !description) {
       return res
@@ -44,7 +39,6 @@ exports.createNote = async (req, res) => {
       description,
       user: _id,
     });
-    // console.log(data);
     if (!data) {
       return res
         .status(401)
@@ -64,12 +58,9 @@ exports.createNote = async (req, res) => {
   }
 };
 
-// Update note
 exports.updateNote = async (req, res) => {
   let noteid = req.params.id;
-  // console.log(noteid);
   const { title, description } = req.body;
-  // console.log(title, description);
   try {
     if (!noteid) {
       return res
@@ -82,7 +73,6 @@ exports.updateNote = async (req, res) => {
       { $set: req.body },
       { new: true }
     );
-    // console.log(note);
     if (!note) {
       return res.status(400).json({
         message: 'Couldnot update note, try again...',
@@ -102,10 +92,8 @@ exports.updateNote = async (req, res) => {
   }
 };
 
-// Delete note
 exports.deleteNote = async (req, res) => {
   let noteid = req.params.id;
-  // console.log(noteid, 'noteid 107');
   try {
     if (!noteid) {
       return res

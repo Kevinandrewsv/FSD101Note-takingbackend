@@ -35,7 +35,6 @@ exports.signup = async (req, res) => {
       id: user._id,
     };
     const token = generateToken(payload);
-    // console.log(token);
     res.status(200).json({
       data: {
         ...payload,
@@ -45,7 +44,6 @@ exports.signup = async (req, res) => {
       status: 'success',
     });
   } catch (error) {
-    // console.log(error);
     res.status(500).json({
       message: `${error.message}--Problem in SignUp`,
       status: 'error',
